@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* ---------- Design tokens ---------- */
+:root {
+  /* colour: strictly black / white with neutral support */
+  --white: #ffffff;
+  --black: #000000;
+  --paper: #f5f5f2;
+  --line: #eaeaea;
+  --muted: #6b6b6b;
+  --ink-soft: #222222;
+
+  /* semantic (swapped by .theme-dark) */
+  --bg: var(--white);
+  --fg: var(--black);
+  --fg-muted: var(--muted);
+  --rule: var(--line);
+
+  /* spacing + layout */
+  --gutter: clamp(1rem, 4vw, 3rem);
+  --section-y: clamp(6rem, 14vw, 12rem);
+  --container: 1440px;
+
+  /* motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 0.35s;
+  --dur-base: 0.7s;
+  --dur-slow: 1.2s;
+
+  /* z-index scale */
+  --z-nav: 40;
+  --z-menu: 30;
+}
+
+.theme-dark {
+  --bg: var(--black);
+  --fg: var(--white);
+  --fg-muted: #a8a8a8;
+  --rule: #2a2a2a;
+}
+
+@theme inline {
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), Georgia, serif;
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-rule: var(--rule);
+  --color-paper: var(--paper);
+}
+
+html {
+  background: var(--white);
+  -webkit-text-size-adjust: 100%;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection { background: var(--black); color: var(--white); }
+.theme-dark ::selection { background: var(--white); color: var(--black); }
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* ---------- Type utilities ---------- */
+@utility container-edge {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+@utility display-xl {
+  font-size: clamp(3.25rem, 11.5vw, 11rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@utility display-lg {
+  font-size: clamp(2.5rem, 7.5vw, 7rem);
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+@utility display-md {
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  font-weight: 500;
+}
+
+@utility micro {
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+@utility body-copy {
+  font-size: 1rem;
+  line-height: 1.7;
+  max-width: 44ch;
+  color: var(--fg-muted);
+}
+
+/* editorial serif accent, italic only, used sparingly */
+@utility serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: -0.02em;
+}
+
+/* ---------- Reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- Hero ---------- */
+@utility display-hero {
+  font-size: min(11.2vw, 14dvh, 6.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+@media (min-width: 1024px) {
+  .display-hero { font-size: min(7.1vw, 14dvh, 6.5rem); }
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/*
+ * Pre-animation states. Only applied once the inline script has added .js
+ * to the html element, and never for reduced-motion users, so content is never lost.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal-line] { transform: translateY(110%); }
+  .js [data-rise] { opacity: 0; }
+  .js [data-clip] { clip-path: inset(100% 0 0 0); }
+  .js [data-hero] [data-fade] { opacity: 0; }
+  .js [data-hero-image] { clip-path: inset(100% 0 0 0); }
+}
