@@ -9,7 +9,7 @@ export const site = {
   town: "Hilongos",
   address: "Brgy. Eastern Pob., Hilongos, Leyte",
   hours: [
-    { days: "Monday to Saturday", time: "6:30am - 7:30pm" },
+    { days: "Monday to Saturday", time: "7:30am - 6:30pm" },
     { days: "Sunday", time: "Closed" },
   ],
   phone: "0915 807 0601",
