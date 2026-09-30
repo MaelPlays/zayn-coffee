@@ -9,12 +9,12 @@ export const site = {
   town: "Hilongos",
   address: "Brgy. Eastern Pob., Hilongos, Leyte",
   hours: [
-    { days: "Monday to Saturday", time: "10am - 8pm" },
+    { days: "Monday to Saturday", time: "6:30am - 7:30pm" },
     { days: "Sunday", time: "Closed" },
   ],
   phone: "0915 807 0601",
   social: [
-    { label: "Instagram", href: "https://www.instagram.com/zayncoffeeph" },
+    { label: "Instagram", href: "https://www.instagram.com/zayn.coffeeph/" },
     { label: "Facebook", href: "https://www.facebook.com/profile.php?id=100090312834866" },
   ],
   directionsHref: "https://www.google.com/maps/search/?api=1&query=Brgy.+Eastern+Pob.,+Hilongos,+Leyte",
